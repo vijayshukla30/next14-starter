@@ -53,6 +53,6 @@ export const login = async (previousState, formData) => {
     if (error.message.includes("CredentialsSignin".toLowerCase())) {
       return { error: "Invalid username or password " };
     }
-    return { error: "Please check credentials." };
+    throw error;
   }
 };
