@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./contact.module.css";
 
 export const metadata = {
-  title: "Contact | Code Dexterous",
+  title: "Contact",
   description: "Contact Us page",
 };
 

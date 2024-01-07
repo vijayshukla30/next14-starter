@@ -6,7 +6,10 @@ import Footer from "@/components/footer/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Code Dexterous",
+  title: {
+    default: "Code Dexterous",
+    template: `%s | Code Dexterous`,
+  },
   description: "Code Dexterous",
 };
 

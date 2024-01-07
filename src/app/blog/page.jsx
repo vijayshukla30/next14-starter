@@ -4,7 +4,7 @@ import PostCard from "@/components/postCard/postCard";
 import { getPosts } from "@/libs/data";
 
 export const metadata = {
-  title: "Blog | Code Dexterous",
+  title: "Blog",
   description: "Blog Page for Code Dexterous",
 };
 
