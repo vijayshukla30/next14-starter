@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from "next/cache";
 import connectDB from "./dbConfig";
 import { Post } from "./models/post";
 import { User } from "./models/user";
@@ -36,6 +37,7 @@ export const getUsers = async () => {
 };
 
 export const getUser = async (userId) => {
+  noStore();
   console.log("userId", userId);
   try {
     connectDB();
