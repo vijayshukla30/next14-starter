@@ -23,7 +23,6 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
       min: 3,
       max: 12,
     },
@@ -35,19 +34,13 @@ const UserSchema = new Schema(
     avatar: {
       type: String,
     },
-    firstName: {
+    name: {
       type: String,
       required: true,
       min: 3,
-      max: 20,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      min: 3,
-      max: 20,
+      max: 50,
     },
   },
   { timestamps: true }
 );
-export const User = mongoose.model("User", UserSchema);
+export const User = mongoose.models?.User || mongoose.model("User", UserSchema);
