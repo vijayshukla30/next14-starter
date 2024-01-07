@@ -3,6 +3,20 @@ import styles from "./page.module.css";
 import { getPost } from "@/libs/data";
 import PostUser from "@/components/postUser/postUser";
 
+export const generateMetadata = async ({ params }) => {
+  const post = await getPost(params.slug);
+
+  console.log("post metadata", post);
+  if (!post) {
+    return;
+  }
+
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
+
 const Post = async ({ params }) => {
   const post = await getPost(params.slug);
   if (!post) {
