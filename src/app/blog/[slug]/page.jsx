@@ -1,24 +1,34 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { getPost } from "@/libs/data";
+// import { getPost } from "@/libs/data";
 import PostUser from "@/components/postUser/postUser";
+
+const getPost = async (slug) => {
+  console.log("slug getPost", slug);
+  const post = await fetch(`http://localhost:3000/api/blogs/${slug}`);
+  console.log("post getPost", post);
+  if (!post.ok) {
+    return null;
+  }
+  return post.json();
+};
 
 export const generateMetadata = async ({ params }) => {
   const post = await getPost(params.slug);
-
-  console.log("post metadata", post);
+  console.log("post generateMetadata", post);
   if (!post) {
     return;
   }
-
   return {
     title: post.title,
     description: post.desc,
   };
 };
 
-const Post = async ({ params }) => {
+const SinglePost = async ({ params }) => {
+  console.log("going to fetch post detail");
   const post = await getPost(params.slug);
+  console.log("post Post", post);
   if (!post) {
     return;
   }
@@ -47,4 +57,4 @@ const Post = async ({ params }) => {
   );
 };
 
-export default Post;
+export default SinglePost;

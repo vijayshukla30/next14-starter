@@ -1,7 +1,17 @@
 import React from "react";
 import styles from "./blog.module.css";
 import PostCard from "@/components/postCard/postCard";
-import { getPosts } from "@/libs/data";
+// import { getPosts } from "@/libs/data";
+
+const getPosts = async () => {
+  const res = await fetch(`http://localhost:3000/api/blogs`, {
+    next: { revalidate: 3600 },
+  });
+  if (!res.ok) {
+    throw new Error(`Something went wrong`);
+  }
+  return res.json();
+};
 
 export const metadata = {
   title: "Blog",
