@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import styles from "./links.module.css";
 import NavLink from "./navLink/navLink";
 import Image from "next/image";
+import { handleLogout } from "@/libs/action";
+import { Role } from "@/libs/models/user";
 const links = [
   {
     title: "Home",
@@ -21,25 +23,23 @@ const links = [
     path: "/blog",
   },
 ];
-const Links = () => {
+const Links = ({ session }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const session = true;
-  const isAdmin = true;
+  const isAdmin = session?.user?.role === Role.ROLE_ADMIN;
+
   return (
     <div className={styles.container}>
       <div className={styles.links}>
         {links.map((link) => (
           <NavLink item={link} key={link.title} />
         ))}
-        {session ? (
-          isAdmin ? (
-            <>
-              <NavLink item={{ title: "Admin", path: "/admin" }} />
+        {session?.user ? (
+          <>
+            {isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
+            <form action={handleLogout}>
               <button className={styles.logout}>Logout</button>
-            </>
-          ) : (
-            <button>Logout</button>
-          )
+            </form>
+          </>
         ) : (
           <NavLink item={{ title: "Login", path: "/login" }} />
         )}
