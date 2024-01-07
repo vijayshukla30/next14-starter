@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 import { signIn, signOut } from "./auth";
 import connectDB from "./dbConfig";
-import { User } from "./models/user";
+import { Role, User } from "./models/user";
 
 export const handleGithubLogin = async () => {
   await signIn("github");
@@ -36,6 +36,7 @@ export const register = async (previousState, formData) => {
       email,
       password: hashPassword,
       avatar,
+      role: Role.ROLE_USER,
     });
     await newUser.save();
     return { success: true };
@@ -44,12 +45,14 @@ export const register = async (previousState, formData) => {
     return { error: "Something went wrong." };
   }
 };
-export const login = async (formData) => {
+export const login = async (previousState, formData) => {
   const { username, password } = Object.fromEntries(formData);
   try {
     await signIn("credentials", { username, password });
   } catch (error) {
-    console.log("error", error);
-    return { error: "Something went wrong." };
+    if (error.message.includes("CredentialsSignin".toLowerCase())) {
+      return { error: "Invalid username or password " };
+    }
+    return { error: "Please check credentials." };
   }
 };

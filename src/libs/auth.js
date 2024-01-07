@@ -10,9 +10,7 @@ const GITHUB_SECRET = process.env.GITHUB_SECRET;
 const login = async (credentials) => {
   try {
     connectDB();
-    console.log("credentials login", credentials);
     const user = await User.findOne({ username: credentials.username });
-    console.log("user login", user);
     if (!user) {
       throw new Error("Wrong Credentials");
     }
@@ -20,14 +18,12 @@ const login = async (credentials) => {
       credentials.password,
       user.password
     );
-    console.log("isPasswordCorrect login", isPasswordCorrect);
     if (!isPasswordCorrect) {
       throw new Error("Wrong Credentials");
     }
     return user;
   } catch (error) {
-    console.log("error login", error);
-    throw new Error(`Failed to login`);
+    throw new Error("Failed to login");
   }
 };
 export const {
@@ -40,7 +36,6 @@ export const {
     GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET }),
     CredentialsProvider({
       async authorize(credentials) {
-        console.log("credentials authorize", credentials);
         try {
           const user = await login(credentials);
           return user;
