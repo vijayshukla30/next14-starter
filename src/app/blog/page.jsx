@@ -3,6 +3,11 @@ import styles from "./blog.module.css";
 import PostCard from "@/components/postCard/postCard";
 import { getPosts } from "@/libs/data";
 
+export const metadata = {
+  title: "Blog | Code Dexterous",
+  description: "Blog Page for Code Dexterous",
+};
+
 const Blogs = async () => {
   const posts = await getPosts();
   return (

@@ -1,6 +1,11 @@
 import Image from "next/image";
 import styles from "./contact.module.css";
 
+export const metadata = {
+  title: "Contact | Code Dexterous",
+  description: "Contact Us page",
+};
+
 const Contact = () => {
   return (
     <div className={styles.container}>
