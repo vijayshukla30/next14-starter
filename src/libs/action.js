@@ -11,7 +11,7 @@ export const handleLogout = async () => {
   await signOut();
 };
 
-export const register = async (formData) => {
+export const register = async (previousState, formData) => {
   const { username, email, password, repeatPassword, avatar } =
     Object.fromEntries(formData);
 
@@ -38,6 +38,7 @@ export const register = async (formData) => {
       avatar,
     });
     await newUser.save();
+    return { success: true };
   } catch (error) {
     console.log("error", error);
     return { error: "Something went wrong." };
