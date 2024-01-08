@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import connectDB from "./dbConfig";
 import { Role, User } from "./models/user";
+import { authConfig } from "./auth.config";
 const GITHUB_ID = process.env.GITHUB_ID;
 const GITHUB_SECRET = process.env.GITHUB_SECRET;
 
@@ -32,6 +33,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  ...authConfig,
   providers: [
     GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET }),
     CredentialsProvider({
@@ -71,5 +73,6 @@ export const {
       }
       return true;
     },
+    ...authConfig.callbacks,
   },
 });
