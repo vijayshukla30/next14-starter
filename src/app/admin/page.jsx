@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import styles from "./admin.module.css";
-import AdminPosts from "@/components/adminPosts/adminPosts";
-import AdminPostForm from "@/components/adminPostForm/adminPostForm";
-import AdminUsers from "@/components/adminUsers/adminUsers";
-import AdminUserForm from "@/components/adminUserForm/adminUserForm";
+import AdminPosts from "@/components/admin/posts/posts";
+import AdminPostForm from "@/components/admin/postForm/postForm";
+import AdminUsers from "@/components/admin/users/users";
+import AdminUserForm from "@/components/admin/userForm/userForm";
 import { auth } from "@/libs/auth";
 const Admin = async () => {
   const session = await auth();

@@ -22,7 +22,6 @@ export const authConfig = {
       return session;
     },
     authorized({ auth, request }) {
-      console.log("auth", auth);
       const user = auth?.user;
       const nextUrl = request.nextUrl?.pathname;
       const isOnAdminPage = nextUrl?.startsWith("/admin");
@@ -39,6 +38,7 @@ export const authConfig = {
       }
 
       if ((isOnLoginPage || isOnRegisterPage) && user) {
+        console.log("user", user);
         return Response.redirect(new URL("/", request.nextUrl));
       }
       return true;

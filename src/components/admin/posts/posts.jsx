@@ -1,5 +1,5 @@
 import { getPosts } from "@/libs/data";
-import styles from "./adminPosts.module.css";
+import styles from "./posts.module.css";
 import Image from "next/image";
 import { deletePost } from "@/libs/action";
 
