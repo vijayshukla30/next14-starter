@@ -56,7 +56,6 @@ const menuItems = [
         icon: <MdOutlineSettings />,
       },
       { title: "Help", path: "/admin/help", icon: <MdHelpCenter /> },
-      { title: "", path: "", icon: "" },
     ],
   },
 ];
@@ -86,6 +85,10 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
+      <button className={styles.logout}>
+        <MdLogout />
+        Logout
+      </button>
     </div>
   );
 };
