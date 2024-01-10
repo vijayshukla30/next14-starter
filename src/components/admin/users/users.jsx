@@ -5,28 +5,37 @@ import styles from "./users.module.css";
 
 const AdminUsers = async () => {
   const users = await getUsers();
-  return (
-    <div className={styles.container}>
-      <h1>Users</h1>
-      {users.map((user) => (
-        <div key={user._id} className={styles.user}>
-          <div className={styles.detail}>
-            <Image
-              src={user.avatar || "/noavatar.png"}
-              alt={user.name}
-              width={50}
-              height={50}
-            />
-            <span className={styles.title}>{user.username}</span>
-          </div>
+  return users.map((user) => (
+    <tr key={user._id}>
+      <td>
+        <div className={styles.user}>
+          <Image
+            src={user.avatar || "/noavatar.png"}
+            alt={user.name}
+            width={40}
+            height={40}
+            className={styles.userImage}
+          />
+          <span>{user.username}</span>
+        </div>
+      </td>
+      <td>{user.email}</td>
+      <td>createat</td>
+      <td>{user.role}</td>
+      <td>status</td>
+      <td>
+        <div className={styles.buttons}>
+          <button className={`${styles.button} ${styles.view}`}>View</button>
           <form action={deleteUser}>
             <input type="hidden" name="id" value={user._id} />
-            <button className={styles.deleteBtn}>Delete</button>
+            <button className={`${styles.button} ${styles.delete}`}>
+              Delete
+            </button>
           </form>
         </div>
-      ))}
-    </div>
-  );
+      </td>
+    </tr>
+  ));
 };
 
 export default AdminUsers;

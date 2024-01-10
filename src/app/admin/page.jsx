@@ -6,7 +6,7 @@ import Chart from "@/components/admin/chart/chart";
 import RightBar from "@/components/admin/rightbar/rightbar";
 // import AdminPosts from "@/components/admin/posts/posts";
 // import AdminPostForm from "@/components/admin/postForm/postForm";
-// import AdminUsers from "@/components/admin/users/users";
+
 // import AdminUserForm from "@/components/admin/userForm/userForm";
 const Admin = async () => {
   return (
