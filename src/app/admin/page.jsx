@@ -1,14 +1,30 @@
 // import { Suspense } from "react";
-// import styles from "./admin.module.css";
+import Card from "@/components/admin/card/card";
+import styles from "./admin.module.css";
+import Transaction from "@/components/admin/transaction/transaction";
+import Chart from "@/components/admin/chart/chart";
+import RightBar from "@/components/admin/rightbar/rightbar";
 // import AdminPosts from "@/components/admin/posts/posts";
 // import AdminPostForm from "@/components/admin/postForm/postForm";
 // import AdminUsers from "@/components/admin/users/users";
 // import AdminUserForm from "@/components/admin/userForm/userForm";
-import { auth } from "@/libs/auth";
 const Admin = async () => {
-  const session = await auth();
-  console.log("session", session);
-  return <div>Admin</div>;
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.main}>
+        <div className={styles.cards}>
+          <Card />
+          <Card />
+          <Card />
+        </div>
+        <Transaction />
+        <Chart />
+      </div>
+      <div className={styles.side}>
+        <RightBar />
+      </div>
+    </div>
+  );
 };
 
 export default Admin;
