@@ -2,6 +2,7 @@ import { getUsers } from "@/libs/data";
 import Image from "next/image";
 import { deleteUser } from "@/libs/action";
 import styles from "./users.module.css";
+import Link from "next/link";
 
 const AdminUsers = async () => {
   const users = await getUsers();
@@ -25,7 +26,12 @@ const AdminUsers = async () => {
       <td>status</td>
       <td>
         <div className={styles.buttons}>
-          <button className={`${styles.button} ${styles.view}`}>View</button>
+          <Link
+            href={`/admin/users/${user._id}`}
+            className={`${styles.button} ${styles.view}`}
+          >
+            View
+          </Link>
           <form action={deleteUser}>
             <input type="hidden" name="id" value={user._id} />
             <button className={`${styles.button} ${styles.delete}`}>
