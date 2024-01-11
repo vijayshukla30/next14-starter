@@ -1,12 +1,9 @@
-import { getUsers } from "@/libs/data";
 import Image from "next/image";
 import { deleteUser } from "@/libs/action";
 import styles from "./users.module.css";
 import Link from "next/link";
 
-const AdminUsers = async ({ query }) => {
-  console.log("query", query);
-  const users = await getUsers(query);
+const AdminUsers = async ({ users }) => {
   return users.map((user) => (
     <tr key={user._id}>
       <td>

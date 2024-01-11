@@ -25,17 +25,26 @@ export const getPost = async (slug) => {
   }
 };
 
-export const getUsers = async (query) => {
+export const getUsers = async (page, limit, query) => {
   try {
+    limit = 1;
     connectDB();
     let users = [];
+    let count = 0;
     if (query) {
       const regex = new RegExp(query, "i");
-      users = await User.find({ username: { $regex: regex } });
+      count = await User.find({ username: { $regex: regex } }).count();
+      users = await User.find({ username: { $regex: regex } })
+        .limit(limit)
+        .skip(limit * (page - 1));
     } else {
-      users = await User.find();
+      count = await User.find().count();
+      users = await User.find()
+        .limit(limit)
+        .skip(limit * (page - 1));
     }
-    return users;
+
+    return { count, users };
   } catch (error) {
     console.log("error", error);
     throw new Error(`Failed to get users!`);

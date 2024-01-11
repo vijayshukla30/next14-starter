@@ -3,8 +3,15 @@ import styles from "./users.module.css";
 import AdminUsers from "@/components/admin/users/users";
 import Link from "next/link";
 import Pagination from "@/components/admin/pagination/pagination";
-const Users = ({ searchParams }) => {
+import { getUsers } from "@/libs/data";
+const Users = async ({ searchParams }) => {
   const query = searchParams?.q || "";
+  const page = searchParams?.page || 1;
+  const limit = searchParams?.page || 10;
+
+  console.log("query", query);
+  const { count, users } = await getUsers(page, limit, query);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -25,10 +32,10 @@ const Users = ({ searchParams }) => {
           </tr>
         </thead>
         <tbody>
-          <AdminUsers query={query} />
+          <AdminUsers users={users} />
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 };
