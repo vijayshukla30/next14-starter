@@ -25,10 +25,16 @@ export const getPost = async (slug) => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (query) => {
   try {
     connectDB();
-    const users = await User.find();
+    let users = [];
+    if (query) {
+      const regex = new RegExp(query, "i");
+      users = await User.find({ username: { $regex: regex } });
+    } else {
+      users = await User.find();
+    }
     return users;
   } catch (error) {
     console.log("error", error);

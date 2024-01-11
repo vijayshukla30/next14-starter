@@ -3,7 +3,8 @@ import styles from "./users.module.css";
 import AdminUsers from "@/components/admin/users/users";
 import Link from "next/link";
 import Pagination from "@/components/admin/pagination/pagination";
-const Users = () => {
+const Users = ({ searchParams }) => {
+  const query = searchParams?.q || "";
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -24,7 +25,7 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          <AdminUsers />
+          <AdminUsers query={query} />
         </tbody>
       </table>
       <Pagination />
