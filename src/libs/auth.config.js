@@ -10,6 +10,10 @@ export const authConfig = {
       if (user) {
         token.id = user.id;
         token.role = user.role;
+        token.username = user.username;
+        token.email = user.email;
+        token.avatar = user.avatar;
+        token.name = user.name;
       }
       return token;
     },
@@ -17,6 +21,10 @@ export const authConfig = {
       if (token) {
         session.user.id = token.id;
         session.user.role = token.role;
+        session.user.username = token.username;
+        session.user.email = token.email;
+        session.user.avatar = token.avatar;
+        session.user.name = token.name;
       }
 
       return session;
@@ -38,8 +46,11 @@ export const authConfig = {
       }
 
       if ((isOnLoginPage || isOnRegisterPage) && user) {
-        console.log("user", user);
-        return Response.redirect(new URL("/", request.nextUrl));
+        if (user.role === Role.ROLE_ADMIN) {
+          return Response.redirect(new URL("/admin", request.nextUrl));
+        } else {
+          return Response.redirect(new URL("/", request.nextUrl));
+        }
       }
       return true;
     },
